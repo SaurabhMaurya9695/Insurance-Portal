@@ -10,7 +10,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  username: string;
+  email: string;
   password: string;
   params: Params;
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
@@ -35,16 +35,28 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const username = this.loginForm.get('username').value;
+    const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
-    this.authService.login(username, password).then((success: boolean) => {
-      console.log("moving to dashboard" +  success)
-      if (success) this.router.navigate(['/dashboard']);
-      else {
-        this.router.navigate(['/login'], {
-          queryParams: { invalid: 'true' },
-        });
+    // this.authService.login(email, password).then((success: boolean) => {
+    //   console.log("moving to dashboard" +  success)
+    //   if (success) this.router.navigate(['/dashboard']);
+    //   else {
+    //     this.router.navigate(['/login'], {
+    //       queryParams: { invalid: 'true' },
+    //     });
+    //   }
+    // });
+
+    this.authService.login(email , password).subscribe({
+      next:(data : any)=>{
+        console.log(data);
+        this.authService.setUser(data);
+        this.authService.loginUser(data.jwtToken)
+        this.router.navigate(['/dashboard']);
+      },
+      error :(err : any)=>{
+        console.log(err);
       }
-    });
+    })
   }
 }

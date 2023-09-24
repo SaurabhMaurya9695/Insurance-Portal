@@ -8,6 +8,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PlanListComponent } from 'src/app/components/plan-list/plan-list.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { AuthGuard } from './auth.guard';
+import { FinacialComponent } from './components/finacial/finacial.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +23,9 @@ const routes: Routes = [
   //canActivate: [AuthGuard] 
 },
   { path: 'plans', component: PlanListComponent },
-  { path: 'payment', component: PaymentComponent, 
+  { path: 'financial', component: FinacialComponent },
+
+  { path: 'payement', component: PaymentComponent, 
   //canActivate: [AuthGuard] 
 },
 ];

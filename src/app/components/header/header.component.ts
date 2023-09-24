@@ -13,13 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService
-      .getUsername()
-      .then((res: string) => (this.isLoggedIn = res ? true : false));
-
-    this.authService.loggedIn.subscribe(
-      (res: boolean) => (this.isLoggedIn = res)
-    );
+    this.isLoggedIn= this.authService.isLoggedIn();
   }
 
   logout(): void {
@@ -28,5 +22,6 @@ export class HeaderComponent implements OnInit {
         queryParams: { logout: 'true' },
       });
     });
+    location.reload();
   }
 }

@@ -19,16 +19,16 @@
     novalidate
   >
     <div class="form-group">
-      <label>Username</label>
+      <label>Email</label>
       <input
         type="text"
-        [formControlName]="'username'"
-        name="username"
+        [formControlName]="'email'"
+        name="email"
         class="form-control"
       />
       <span
         *ngIf="
-          !loginForm.get('username').valid && loginForm.get('username').touched
+          !loginForm.get('email').valid && loginForm.get('email').touched
         "
         class="text-danger"
         >Please provide a valid username.</span

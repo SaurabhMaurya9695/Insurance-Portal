@@ -11,15 +11,6 @@ import { MemberService } from 'src/app/services/member.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  // public id: string,
-  //   public username: string,
-  //   public password: string,
-  //   public email: string,
-  //   public plan: Plan,
-  //   public memberSince: number,
-  //   public nextPaymentDate: number,
-  //   public payments: Payment[],
-  //   public notifications: Notification[],
   member: Member;
   notifications: Notification[];
   params: Params;
@@ -30,12 +21,42 @@ export class DashboardComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  
+  Members = [
+    {
+      coverage_amount : '',
+      premium_amount : '',
+      coverage_start_date : '',
+      coverage_end_date : '',
+      policy_status : '',
+      insurance_type : '',
+
+    }
+  ];
+
   ngOnInit(): void {
-    this.authService.getUsername().then((username: string) => {
-      this.memberService.getMember(username).subscribe((member: Member) => {
-        this.member = member;
-      });
-    });
+    // this.authService.getUsername().then((username: string) => {
+    //   this.memberService.getMember(username).subscribe((member: Member) => {
+    //     this.member = member;
+    //   });
+    // });
+
+    
+    if(this.authService.getToken() != null && this.authService.isLoggedIn() ){
+      console.log("inside Dashboard")
+      this.memberService.getMember().subscribe({
+        next:(data: any)=>{
+          console.log(data);
+          this.Members = data;
+        },
+        error:(err:any)=>{
+          console.log(err);
+        }
+      })
+    }
+    else{
+      console.log("outside dashboard");
+    }
 
     this.activatedRoute.queryParams.subscribe(
       (params: Params) => (this.params = params)

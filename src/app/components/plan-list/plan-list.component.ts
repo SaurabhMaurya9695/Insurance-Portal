@@ -33,25 +33,32 @@ export class PlanListComponent implements OnInit {
   }
 
   selectPlan(plan: Plan): void {
-    this.authService.getUsername().then((username: string) => {
-      if (!username) {
-        this.router.navigate(['/plans'], {
+    // this.authService.getUsername().then((username: string) => {
+    //   if (!username) {
+    //     this.router.navigate(['/plans'], {
+    //       queryParams: { unauthenticated: true },
+    //     });
+    //     return;
+      // }
+
+      if(this.authService.isLoggedIn()){
+            this.router.navigate(['/plans'], {
           queryParams: { unauthenticated: true },
         });
-        return;
+        return ;
       }
 
-      this.memberService.getMember(username).subscribe((member: Member) => {
-        if (member.plan) {
-          this.router.navigate(['/plans'], {
-            queryParams: { enrolled: true },
-          });
-        } else {
-          this.router.navigate(['/payment'], {
-            queryParams: { plan: plan.id },
-          });
-        }
-      });
-    });
-  }
+      // this.memberService.getMember(username).subscribe((member: Member) => {
+      //   if (member.plan) {
+      //     this.router.navigate(['/plans'], {
+      //       queryParams: { enrolled: true },
+      //     });
+      //   } else {
+      //     this.router.navigate(['/payment'], {
+      //       queryParams: { plan: plan.id },
+      //     });
+      //   }
+      // });
+    };
+  
 }

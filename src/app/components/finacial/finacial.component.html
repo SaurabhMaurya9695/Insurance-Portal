@@ -1,0 +1,21 @@
+<div class="container mt-5" *ngIf="Finacial">
+    <table  class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">service_name</th>
+          <th scope="col">service_description</th>
+          <th scope="col">service_type</th>
+          <th scope="col">service_status</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let x of Finacial">
+        <tr>
+          <th scope="row">{{x.service_name}}</th>
+          <td>{{x.service_description}}</td>
+          <td>{{x.service_type}}</td>
+          <td>{{x.service_status}}</td>
+          <button type="button" class="btn btn-danger btn-sm" style="margin-left: 5px;margin-top: 2px ;size: 20px;" (click)="apply(x.service_id , x.service_name)">Apply  </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>

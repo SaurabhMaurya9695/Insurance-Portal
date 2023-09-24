@@ -23,11 +23,11 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getUsername().then((username: string) => {
-      this.memberService
-        .getMember(username)
-        .subscribe((member: Member) => (this.member = member));
-    });
+    // this.authService.getUsername().then((username: string) => {
+    //   this.memberService
+    //     .getMember(username)
+    //     .subscribe((member: Member) => (this.member = member));
+    // });
 
     this.activatedRoute.queryParams.subscribe(
       (params: Params) => (this.params = params)

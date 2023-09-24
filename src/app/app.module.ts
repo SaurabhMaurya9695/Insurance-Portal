@@ -17,6 +17,9 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 
 import Amplify from 'aws-amplify';
+import { FinacialComponent } from './components/finacial/finacial.component';
+// import { authInterceptorProviders } from './services/auth.interceptor';
+// import { AuthService } from './services/auth.service';
 
 Amplify.configure({
   Auth: {
@@ -39,6 +42,7 @@ Amplify.configure({
     PlanListComponent,
     PaymentComponent,
     DateAgoPipe,
+    FinacialComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ Amplify.configure({
     ReactiveFormsModule,
     HttpClientModule,
   ],
+  // providers:[authInterceptorProviders , AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

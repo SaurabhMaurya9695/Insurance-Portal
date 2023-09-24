@@ -1,22 +1,32 @@
-<div class="mx-5 mt-4">
-  <div class="w-25">
-    <div *ngIf="params.enrolled" class="alert alert-danger">
-      Already enrolled in a plan.
-    </div>
-    <div *ngIf="params.unauthenticated" class="alert alert-danger">
-      You must be logged in to enroll in a plan.
-    </div>
-  </div>
-  <h1>Plans</h1>
-  <div *ngFor="let plan of plans" class="border w-25 m-4 p-4">
-    <h3>{{ plan.name }}</h3>
-    <p>Cost: {{ plan.cost / 100 | currency: "USD" }}/mo</p>
-    <p>Deductible: {{ plan.deductible / 100 | currency: "USD" }}</p>
-    <input
-      type="submit"
-      value="Select Plan"
-      (click)="selectPlan(plan)"
-      class="btn btn-primary"
-    />
-  </div>
+<!-- public claim_id: any,
+    public claim_type: any,
+    public claim_status: any,
+    public claim_amount: any,
+    public supported_document_url: any,
+    public claim_submission_date: any,
+    public claim_approval_date: any, -->
+
+<div class="container mt-5">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">claim_id</th>
+        <th scope="col">claim_type</th>
+        <th scope="col">claim_status</th>
+        <th scope="col">claim_amount</th>
+        <th scope="col">supported_document_url</th>
+        <th scope="col">claim_approval_date</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let x of plans">
+      <tr>
+        <th scope="row">{{x.claim_id}}</th>
+        <td>{{x.claim_type}}</td>
+        <td>{{x.claim_status}}</td>
+        <td>{{x.claim_amount}}</td>
+        <td>{{x.supported_document_url}}</td>
+        <td>{{x.claim_approval_date}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
